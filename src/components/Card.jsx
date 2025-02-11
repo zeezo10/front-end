@@ -10,12 +10,12 @@ export default function Card(props) {
   return (
     <>
     
-    <Link href={``}>
+    <Link to={`/products/${product.id}`}>
       <div className="w-[300px] h-[400px] bg-white hover:bg-lime-100 shadow-xl font-sans font-thin rounded-md overflow-hidden">
        
         <div
           style={{
-            backgroundImage: `url(${product.image})`,
+            // backgroundImage: `url(${product.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

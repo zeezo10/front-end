@@ -3,9 +3,11 @@
 
 import { useEffect, useState } from "react";
 import { productsAtom, searchQueryAtom } from "../jotai/Jotai";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import Card from "../components/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { addToCart } from "../jotai/cartUtils";
+import { cartAtom } from "../jotai/cartAtom";
 
 export default function Products() {
   const [products] = useAtom(productsAtom);
@@ -14,6 +16,8 @@ export default function Products() {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [visibleCount, setVisibleCount] = useState(8);
+
+  const setCart = useSetAtom(cartAtom);
 
 
   useEffect(() => {
@@ -65,10 +69,10 @@ export default function Products() {
             What are you looking for?
           </h2>
         </div>
-        <div className="border-[1px] border-[#504e46] flex-1"></div>
+        {/* <div className="border-[1px] border-[#504e46] flex-1"></div> */}
         <div className="pt-2 relative text-gray-600">
           <input
-            className="shadow-md border-[1px] border-[#292929] rounded-sm bg-white h-10 px-5 pr-16 text-sm focus:outline-none w-[400px] flex items-center"
+            className="shadow-sm rounded-sm bg-white h-10 px-5 pr-16 text-sm focus:outline-none w-[400px] flex items-center"
             type="search"
             name="search"
             placeholder="Search"
@@ -92,9 +96,10 @@ export default function Products() {
         hasMore={hasMore}
         loader={<h4 className="text-center my-4">Loading more...</h4>}
       >
-        <div className="flex flex-wrap justify-center gap-2 overflow-hidden min-h-[500px] ">
+        <div className="flex flex-wrap justify-center gap-2 overflow-hidden min-h-[500px] pb-40 ">
           {filteredProducts.map((el, index) => (
             <div key={el.id || index}>
+              <button className=" cursor-pointer" onClick={() => addToCart(setCart, el)}>Tambah ke Keranjang</button>
               <Card product={el} />
             </div>
           ))}
