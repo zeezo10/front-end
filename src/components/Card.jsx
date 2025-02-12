@@ -17,7 +17,7 @@ export default function Card(props) {
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-36 object-cover"
+              className="w-full h-full object-cover"
             />
 
             <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 backdrop-blur-sm transition-all duration-300">
