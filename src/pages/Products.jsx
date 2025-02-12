@@ -1,5 +1,5 @@
 /* eslint-disable */
-"use client";
+;
 
 import { useEffect, useState } from "react";
 import { productsAtom, searchQueryAtom } from "../jotai/Jotai";
@@ -140,13 +140,10 @@ export default function Products() {
             What are you looking for?
           </h2>
         </div>
-        <div className="border-[1px] border-[#504e46] flex-1 sm:hidden hidden md:block "></div> 
+        <div className="border-[1px] border-[#504e46] flex-1 sm:hidden hidden md:block "></div>
 
         <div className="pt-2 relative text-gray-600 flex justify-center">
-          <form
-            onSubmit={handleSearch}
-            className="relative w-full "
-          >
+          <form onSubmit={handleSearch} className="relative w-full ">
             <input
               className="shadow-sm rounded-sm bg-white h-8 sm:h-10  px-5 pr-12 text-sm focus:outline-none w-full sm:w-[400px] "
               type="search"
