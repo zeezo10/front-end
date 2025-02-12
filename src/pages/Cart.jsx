@@ -10,7 +10,7 @@ import { useCheckCartStock } from "../hooks/useCheckCartStock";
 import { toRupiah } from "../helper/toRupiah";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 
 const Cart = () => {
@@ -19,47 +19,45 @@ const Cart = () => {
   const [totalPrice] = useAtom(totalPriceAtom);
   const [, setCart] = useAtom(cartAtom);
   const createOrder = useSetAtom(createOrderAtom);
-
   const removeCart = useSetAtom(removeFromCart);
-  
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
-      <div className="min-h-screen bg-[#ede8de] px-20 pb-40 ">
-       
-
-        <div className="py-10 flex flex-row-reverse w-2/3 justify-between items-center gap-5  px-5">
-        <div className="flex gap-5">
-
-          <h2 className="text-3xl font-bold">My Cart</h2> 
-          <BsCart3 size={30} /> 
-
+    <div className="min-h-screen bg-[#ede8de] px-4 md:px-10 lg:px-20 pb-20 pt-10  ">
+      {/* Header */}
+      <div className="py-5 flex md:justify-between items-center gap-5">
+        <div className="flex gap-3 items-center">
+          <h2 className="text-2xl md:text-3xl font-bold">My Cart</h2>
+          <BsCart3 size={28} />
         </div>
-          <div className="text-xl text-[#787878]">Items / {cart.length} </div>
-        </div>
+        <div className="text-lg md:text-xl text-[#787878]">Items / {cart.length}</div>
+      </div>
 
-        <div className="flex justify-between min-h-screen gap-5 border-t-[1px]">
-          {cart.length === 0 ? (
-            <div className="w-full flex flex-col items-center pt-20">
-              <p className="text-xl">Your Cart is empty! :(</p>
-              <p className="text-2xl">Discover Today's Best Deals!</p>
-              <Link
-                to={"/products"}
-                className="h-10 w-36 flex justify-center items-center border-1 rounded-sm mt-10 border-white text-white bg-[#c06f52] hover:bg-[#000000]  hover:w-40 transition-all hover:text-white"
-              >
-                SHOP NOW
-              </Link>
-            </div>
-          ) : (
-            <ul className="w-2/3">
+      {/* Cart Content */}
+      <div className="flex flex-col lg:flex-row gap-5 border-t-[1px]">
+        {cart.length === 0 ? (
+          <div className="w-full flex flex-col items-center pt-10">
+            <p className="text-lg md:text-xl">Your Cart is empty! :(</p>
+            <p className="text-xl md:text-2xl">Discover Today's Best Deals!</p>
+            <Link
+              to={"/products"}
+              className="h-10 w-32 md:w-36 flex justify-center items-center border rounded-sm mt-6 bg-[#c06f52] text-white hover:bg-black transition-all"
+            >
+              SHOP NOW
+            </Link>
+          </div>
+        ) : (
+          <div className="flex flex-col lg:flex-row w-full">
+            {/* Cart Items */}
+            <ul className="w-full lg:w-2/3">
               {cart.map((item) => (
                 <li
                   key={item.id}
-                  className="  border-[#a5a5a5] flex p-2  items-center bg-white mt-3 shadow-md"
+                  className="flex flex-row items-center bg-white mt-3 shadow-md p-1 sm:p-4"
                 >
                   <div
-                    className="h-40 w-40 bg-[#d9e2cb] rounded-sm"
+                    className="h-28 w-28 sm:h-40 sm:w-40 bg-[#d9e2cb] rounded-sm"
                     style={{
                       backgroundImage: `url(${item.image})`,
                       backgroundSize: "cover",
@@ -67,25 +65,28 @@ const Cart = () => {
                     }}
                   ></div>
 
-                  <div className="flex-1 flex  justify-between text-[#777777]  px-4">
-                    <div className=" font-semibold text-xl text-[#2c2c2c] w-1/2 ">
+                  <div className="flex-1 flex flex-col h-full  sm:flex-row justify-between text-[#777777] px-4 sm:mt-0 w-full">
+
+                    <div className="w-full flex  sm:flex-row justify-between  ">
+                    <div className="text-sm sm:text-sm md:text-lg  font-semibold   text-[#2c2c2c] sm:w-1/2">
                       {item.name}
                     </div>
+                    <div className="sm:flex  justify-between flex-1 sm:px-4 min-w-24">
 
-                    <div className=" w-1/2 flex  justify-between ">
-                      <div>
-                        <h2>Ouantity</h2>
-                        {item.quantity}
-                      </div>
 
-                      <div>
-                        <h2>Price</h2>
+                        <div className="text-xs sm:text-sm md:text-base">
+                          <h2 className="text-xs sm:text-sm md:text-base">Quantity:</h2>
+                          {item.quantity}
+                        </div>
 
-                        {toRupiah(item.price)}
-                      </div>
+                        <div className="text-xs sm:text-sm md:text-base">
+                          <h2 className="text-xs sm:text-sm md:text-base">Price:</h2>
+                          {toRupiah(item.price)}
+                        </div>
+                    </div>
 
                       <button
-                        className=" h-10   hover:text-red-400 cursor-pointer"
+                        className="mt-3 sm:mt-0 hover:text-red-400 cursor-pointer  h-full"
                         onClick={() => removeCart(item.id)}
                       >
                         <FaTrash />
@@ -95,51 +96,49 @@ const Cart = () => {
                 </li>
               ))}
             </ul>
-          )}
 
-          <div className="min-h-full  w-1/3 flex flex-col px-5 py-3">
-            <div className=" justify-between flex flex-col h-1/2 p-5 items-center bg-white shadow-md">
-              <div className="text-lg border-b-[1px] w-full">Total Cart</div>
-              <div className="flex flex-col justify-between py-10 flex-1 w-full text-[#777777] ">
-                <div>
-                  <p className="flex justify-between ">
-                    Shiping:{" "}
-                    <span className="text-right">
-                      1234 Burrito Boulevard, Apt. 404 Cheeseburger City, Nacho
-                      State ZIP: 80085 Phone: (555) 867-5309
-                    </span>
+            
+            <div className="w-full lg:w-1/3 flex flex-col lg:px-5 py-3 ">
+              <div className="bg-white shadow-md p-5">
+                <div className="text-lg border-b pb-2">Total Cart</div>
+                <div className="py-6 space-y-3 text-[#777777]">
+                  <p className="flex justify-between text-sm sm:text-base">
+                    Shipping Address:
+                    <span className="text-right">1234 Burrito Blvd, Nacho City</span>
                   </p>
-                  <p className="flex justify-between ">
+                  <p className="flex justify-between text-sm sm:text-base">
                     Total Items: <span>{totalItems}</span>
                   </p>
-                  <p className="flex justify-between ">
-                    shipping fee: <span>free</span>
+                  <p className="flex justify-between text-sm sm:text-base">
+                    Shipping Fee: <span>Free</span>
                   </p>
                 </div>
 
-                <div className="border-t-[1px]">
-                  <p className="flex justify-between">
+                <div className="border-t pt-3">
+                  <p className="flex justify-between text-sm sm:text-base">
                     Total Price: <span>{toRupiah(totalPrice)}</span>
                   </p>
                 </div>
-              </div>
 
-              {cart.length > 0 && (
-                <button
-                  onClick={() => createOrder(navigate)}
-                  className="bg-[#000000] cursor-pointer hover:bg-[#222] transition-all duration-300  text-white  w-1/2 h-10 text-xl rounded-sm "
-                >
-                  Check out
-                </button>
-              )}
+                {cart.length > 0 && (
+                  <button
+                    onClick={() => createOrder(navigate)}
+                    className="bg-black hover:bg-[#222] transition-all text-white w-full h-10 mt-5 text-lg rounded-sm"
+                  >
+                    Check Out
+                  </button>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
-  
+     
+    </div>
 
-      <footer className="  shadow bg-black text-white  ">
+    
+    <footer className="  shadow bg-black text-white  ">
         <div className="w-full mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <a className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">

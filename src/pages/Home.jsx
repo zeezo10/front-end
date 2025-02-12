@@ -14,7 +14,7 @@ export default function Home() {
   const bestSellers = product.data.data;
 
   return (
-    <div className="bg-[#ede8de] xl:bg-red-400 lg:bg-amber-400 md:bg-green-400 sm:bg-purple-400">
+    <div className="bg-[#ede8de] ">
       <div className="h-80 w-full xl:h-[700px] p-5 md:h-[500px]  sm:p-10 overflow-hidden relative lg:h-[500px]">
         <div
           style={{

@@ -43,7 +43,7 @@ export default function NavBar() {
 
       {/* Navigation Links */}
       <div
-        className={`absolute z-50 lg:static top-16  left-0 right-0 pb-5 sm:p-0 shadow-2xl sm:shadow-none bg-[#ede8de] lg:bg-transparent lg:flex flex-col lg:flex-row gap-5 items-center lg:relative transition-all duration-300 ${
+        className={`absolute z-50 lg:static top-16  left-0 right-0 pb-5 sm:p-0 shadow-2xl sm:shadow-none bg-[rgba(228,228,228,0.8)]  lg:bg-transparent lg:flex flex-col lg:flex-row gap-5 items-center lg:relative transition-all duration-300 ${
           menuOpen ? "flex" : "hidden"
         }`}
       >
