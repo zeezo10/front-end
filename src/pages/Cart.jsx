@@ -22,6 +22,9 @@ const Cart = () => {
   const removeCart = useSetAtom(removeFromCart);
   const navigate = useNavigate();
 
+  if (cart.state === "hasError") return <h1>ERROR</h1>;
+  if (cart.state === "loading") return <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">LOADING ...</div>;
+
   return (
     <>
     <div className="min-h-screen bg-[#ede8de] px-4 md:px-10 lg:px-20 pb-20 pt-10  ">

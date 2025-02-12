@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 const Order = () => {
   const [orders] = useAtom(ordersAtom);
 
+  if (orders.state === "hasError") return <h1>ERROR</h1>;
+  if (orders.state === "loading") return <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">LOADING ...</div>;
+
   return (
 
     <>

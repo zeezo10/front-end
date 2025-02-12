@@ -49,6 +49,8 @@ export default function Products() {
   };
 
   if (products.state === "hasError") return <h1>ERROR</h1>;
+  if (products.state === "loading") return <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">LOADING ...</div>;
+    
 
   return (
     <div className="flex flex-col items-center  bg-[#ede8de]  font-sans pt-5 ">
