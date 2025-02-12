@@ -34,7 +34,7 @@ export const totalPriceAtom = atom((get) =>
 );
 
 
-export const createOrderAtom = atom(null, async (get, set) => {
+export const createOrderAtom = atom(null, async (get, set, navigate) => {
     try {
       const cartItems = get(cartAtom);
   
@@ -55,10 +55,10 @@ export const createOrderAtom = atom(null, async (get, set) => {
         total_price: get(totalPriceAtom),
       };
 
-      console.log(orderPayload);
+ 
       
   
-      // API call
+  
       const response = await fetch("https://fe-test-api.jmm88.com/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -88,8 +88,8 @@ export const createOrderAtom = atom(null, async (get, set) => {
       set(cartAtom, []);
       localStorage.removeItem("cart");
       
-   
-      
+      navigate("/order");
+
       return data;
     } catch (error) {
       console.error("Error creating order:", error.message);

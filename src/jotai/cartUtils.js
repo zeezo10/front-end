@@ -1,8 +1,9 @@
+import { atom } from "jotai";
 import { cartAtom } from "./cartAtom";
 
 export const addToCart = (setCart, product) => {
   setCart((prevCart) => {
-    console.log("Inside setCart callback"); // Should log if setCart is working
+    console.log("Inside setCart callback"); 
 
     const existingProduct = prevCart.find((item) => item.id === product.id);
     let updatedCart;
@@ -21,17 +22,18 @@ export const addToCart = (setCart, product) => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     return updatedCart;
   });
-  console.log("addToCart function executed"); // This will log immediately
+  console.log("addToCart function executed"); 
 };
 
-// Function to remove a product from cart
-export const removeFromCart = (set, productId) => {
 
-    console.log(productId);
-    
-  set(cartAtom, (prevCart) => {
-    const updatedCart = prevCart.filter((item) => item.id !== productId);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    return updatedCart;
-  });
-};
+
+export const removeFromCart = atom(null, (get, set, productId) => {
+ 
+  
+  const updatedCart = get(cartAtom).filter(item => item.id !== productId);
+  
+  
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  set(cartAtom, updatedCart);
+});
+

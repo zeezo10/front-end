@@ -7,6 +7,8 @@ import Product from "./pages/Products";
 import Layout from "./Layout";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
+import Order from "./pages/Order";
+import OrderDetail from "./pages/OrderDetail.";
 
 const router = createBrowserRouter([
 
@@ -21,6 +23,16 @@ const router = createBrowserRouter([
       {
         path :"/products",
         element : <Product/>
+      }
+      ,
+      {
+        path :"/order/:id",
+        element : <OrderDetail/>
+      }
+      ,
+      {
+        path :"/order",
+        element : <Order/>
       }
       ,
       {

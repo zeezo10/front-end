@@ -1,48 +1,6 @@
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  ReactPortal,
-  AwaitedReactNode,
-  Key,
-  useState,
-  useEffect,
-} from "react";
-import { data, useParams } from "react-router-dom";
-import { toRupiah } from "../helper/toRupiah";
-import LoadingProduct from "../components/LoadingProduct";
+import React from "react";
 
-export default function ProductDetail() {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    async function fetchProduct() {
-      try {
-        const response = await fetch(
-          `https://fe-test-api.jmm88.com/api/products/${id}`
-        );
-        if (!response.ok) throw new Error("Failed to fetch product");
-
-        const data = await response.json();
-        setProduct(data);
-      } catch (err) {
-        console.error("Error fetching product:", err);
-        setError(true);
-      }
-    }
-
-    if (id) fetchProduct();
-  }, [id]);
-
-  if (error) return <h1>Error fetching product details</h1>;
-  if (!product) return <LoadingProduct/>;
-
-  let item = product.data;
-
-
-
+export default function LoadingProduct() {
   return (
     <div className="flex flex-col bg-[#ede8de]   ">
       <div className="flex pb-36 justify-center pt-20 px-20">
@@ -57,23 +15,29 @@ export default function ProductDetail() {
                   <div className="w-full h-1/4 rounded-sm shadow-lg bg-amber-200"></div>
                 </div>
                 <div
-                  className="h-[560px] w-[560px] rounded-sm shadow-lg"
+                  className="h-[560px] w-[560px] rounded-sm shadow-lg bg-[#d2d2d2]"
                   style={{
-                    backgroundImage: `url(${item.image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
                 ></div>
-             
+                <div className="flex flex-wrap gap-4 justify-center mx-auto mt-4">
+                  {/* {product.images.map((el: any, index: number) => (
+      <button key={index}>
+        <img
+          src={`${el}`}
+          className="w-16 cursor-pointer rounded-md outline"
+        />
+      </button>
+    ))} */}
+                </div>
               </div>
 
               <div className="flex flex-col justify-between h-full">
                 <div>
                   <div className="flex flex-wrap items-start gap-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-800">
-                        {item.name}
-                      </h2>
+                      <h2 className="text-2xl font-bold text-gray-800 w-60 h-8 bg-[#d2d2d2]"></h2>
                       <p className="text-sm text-gray-500 mt-2">
                         Well-Versed Commerce
                       </p>
@@ -87,23 +51,21 @@ export default function ProductDetail() {
                     <h3 className="text-2xl font-bold text-gray-800">
                       Category
                     </h3>
-                    <p className="text-gray-500  text-xl ">{item.category}</p>
+                    <p className="text-gray-500  text-xl w-20 h-8 bg-[#d2d2d2]"></p>
                   </div>
 
                   <hr className="my-8" />
 
                   <div>
                     <h3 className="text-2xl font-bold text-gray-800">Rating</h3>
-                    <p className="text-gray-500  text-xl ">4.6</p>
+                    <p className="text-gray-500  text-xl w-10 h-8 bg-[#d2d2d2] "></p>
                   </div>
 
                   <hr className="my-8" />
                   <div className=" flex flex-col">
                     <h3 className="text-2xl font-bold text-gray-800 self-end ">
                       Stock:{" "}
-                      <span className="text-gray-500  text-xl font-normal">
-                        {item.stock}
-                      </span>
+                      <span className="text-gray-500  text-xl font-normal"></span>
                     </h3>
                   </div>
                 </div>
@@ -111,9 +73,7 @@ export default function ProductDetail() {
                 <div className="flex flex-wrap gap-4 self-end justify-between w-full">
                   <div className="flex flex-wrap gap-4 ">
                     <div>
-                      <p className="text-gray-600  text-3xl">
-                        {toRupiah(item.price)}
-                      </p>
+                      <p className="text-gray-600  text-3xl"></p>
                     </div>
                   </div>
 
@@ -133,7 +93,7 @@ export default function ProductDetail() {
                 <h3 className="text-xl font-bold text-gray-800">
                   Product Description
                 </h3>
-                <p className="text-sm text-gray-500 mt-4">{item.description}</p>
+                <p className="text-sm text-gray-500 mt-4"></p>
               </div>
             </div>
           </div>

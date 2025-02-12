@@ -5,12 +5,11 @@ import { cartAtom } from "../jotai/cartAtom";  // Update the import path based o
 
 const checkCartStock = async (setCart) => {
 
-    console.log("masukk boosss");
+    
     
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    console.log(cart);
-    
+
   
     const updatedCart = await Promise.all(
       cart.map(async (item) => {

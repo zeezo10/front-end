@@ -8,6 +8,7 @@ import Card from "../components/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { addToCart } from "../jotai/cartUtils";
 import { cartAtom } from "../jotai/cartAtom";
+import { FaSearch } from "react-icons/fa";
 
 export default function Products() {
   const [products] = useAtom(productsAtom);
@@ -16,9 +17,9 @@ export default function Products() {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [visibleCount, setVisibleCount] = useState(8);
+  const [key, setKey] = useState("");
 
   const setCart = useSetAtom(cartAtom);
-
 
   useEffect(() => {
     if (products.state === "hasData") {
@@ -32,7 +33,11 @@ export default function Products() {
     }
   }, [products, searchQuery]);
 
-  
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchQuery(key);
+  };
+
   const fetchMoreData = () => {
     if (visibleCount >= filteredProducts.length) {
       setHasMore(false);
@@ -44,41 +49,119 @@ export default function Products() {
   };
 
   if (products.state === "hasError") return <h1>ERROR</h1>;
-  
 
   return (
-    <div className="flex flex-col items-center bg-[#ede8de] font-sans">
-      {/* Search Bar */}
+    <div className="flex flex-col items-center  bg-[#ede8de]  font-sans pt-5 ">
+      <div className="sm:h-16 w-full text-xs  h-10 bg-[#c06f52] flex justify-center items-center text-white font-thin sm:text-xl">
+        Shop smart, save big! Grab the best deals before they're gone!
+      </div>
 
-      <div className="h-[500px] w-full   px-20 flex items-center justify-center">
+      <div className="sm:h-[500px] w-full h-80 p-2 sm:px-20 flex items-center justify-center">
         <div
-          className="flex-1 h-3/4 overflow-hidden flex flex-col justify-center items-center space-y-5"
+          className="flex-1 h-4/5 overflow-hidden flex flex-col justify-center items-center space-y-5 shadow-xl"
           //   style={{ backgroundImage: `url(${baner2.src})`, backgroundSize: 'cover' }}
         >
-          <div className="flex items-center justify-center w-full h-full bg-gradient-to-t from-[#a1c9c0] to-[#cadfda] rounded-lg">
-            <h1 className="text-5xl text-center flex flex-col text-[#292929]  p-5 bg-opacity-50 font-bold">
-              <span>Upgrade Your Life</span> <span className="font-thin"> Top Deals on Electronics & Furniture!</span>
+          <div className=" absolute ">
+            <h1 className="lg:text-5xl space-y-5 flex flex-col sm:text-2xl md:text-3xl text-[#ffffff]  p-5 bg-opacity-50 font-bold rounded-lg ">
+              <span>
+                Upgrade Your Life<span className="text-[#c06f52]">.</span>
+              </span>{" "}
+              <span className="font-thin">
+                {" "}
+                Top Deals on Electronics & Furniture!
+              </span>
             </h1>
+          </div>
+          <div className="flex items-center justify-center w-full h-full bg-gradient-to-t from-[#a1c9c0] to-[#cadfda] rounded-lg overflow-hidden shadow-lg">
+            <div
+              className=" h-full w-1/3"
+              style={{
+                backgroundImage: `url(https://images.unsplash.com/photo-1592078615290-033ee584e267)`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
+            <div
+              className=" h-full w-1/3"
+              style={{
+                backgroundImage: `url(https://images.unsplash.com/photo-1503602642458-232111445657)`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
+
+            <div
+              className=" h-full w-1/3"
+              style={{
+                backgroundImage: `url(https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85)`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
           </div>
         </div>
       </div>
 
-      <div className="h-40 flex w-full px-20 justify-between items-center gap-10">
-        <div className="h-10 flex items-center">
-          <h2 className="text-3xl text-[#292929] font-semibold">
+      <div className=" h-40 w-full  bottom-40 sm:flex justify-center gap-5 hidden">
+        <div className="bg-white h-full w-72 p-2 rounded-md shadow-md  xl:w-80 md:w-52 hidden md:block ">
+          <div className="border-[1px] p-2 text-sm md:text-xs  border-slate-400 text-slate-400 font-thin h-full w-full rounded-md flex flex-col gap-2">
+            <div>⭐⭐⭐⭐⭐ (5/5)</div>
+            "Absolutely love this product! The quality exceeded my expectations,
+            and the delivery was super fast. Will definitely order again!"
+          </div>
+        </div>
+        <div className="bg-white h-full w-72 p-2 rounded-md shadow-md  xl:w-80 md:w-52 hidden md:block ">
+          <div className="border-[1px] p-2 text-sm md:text-xs  border-slate-400 text-slate-400 font-thin h-full w-full rounded-md flex flex-col gap-2">
+            <div>⭐⭐⭐⭐⭐ (5/5)</div>
+            "Fantastic purchase! The product is exactly as described, and the
+            customer service was top-notch. Will be buying more soon!"
+          </div>
+        </div>
+        <div className="bg-white h-full w-72 p-2 rounded-md shadow-md  xl:w-80 md:w-52 hidden md:block sm:hidden">
+          <div className="border-[1px] p-2 text-sm md:text-xs  border-slate-400 text-slate-400 font-thin h-full w-full rounded-md flex flex-col gap-2 ">
+            <div>⭐⭐⭐⭐☆ (4/5)</div>
+            "Great value for the price! The only reason I’m giving 4 stars
+            instead of 5 is that I wish it came in more colors. Still, highly
+            recommended!"
+          </div>
+        </div>
+        <div className="bg-white h-full w-72 p-2 rounded-md shadow-md  xl:w-80 md:w-52 hidden md:block sm:hidden">
+          <div className="border-[1px] p-2 text-sm md:text-xs  border-slate-400 text-slate-400 font-thin h-full w-full rounded-md flex flex-col gap-2">
+            <div>⭐⭐⭐☆☆ (3/5)</div>
+            "Decent product, but shipping took longer than expected. The quality
+            is good, but I was hoping for a slightly better fit.
+          </div>
+        </div>
+      </div>
+
+      <div className="h-40 sm:flex-row flex flex-col w-full px-20 sm:justify-between justify-center sm:items-center sm:gap-10 ">
+        <div className="h-10 flex items-center justify-center ">
+          <h2 className="md:text-3xl  text-sm text-[#292929] font-semibold sm:text-lg ">
             What are you looking for?
           </h2>
         </div>
-        {/* <div className="border-[1px] border-[#504e46] flex-1"></div> */}
-        <div className="pt-2 relative text-gray-600">
-          <input
-            className="shadow-sm rounded-sm bg-white h-10 px-5 pr-16 text-sm focus:outline-none w-[400px] flex items-center"
-            type="search"
-            name="search"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+        <div className="border-[1px] border-[#504e46] flex-1 sm:hidden hidden md:block "></div> 
+
+        <div className="pt-2 relative text-gray-600 flex justify-center">
+          <form
+            onSubmit={handleSearch}
+            className="relative w-full "
+          >
+            <input
+              className="shadow-sm rounded-sm bg-white h-8 sm:h-10  px-5 pr-12 text-sm focus:outline-none w-full sm:w-[400px] "
+              type="search"
+              name="search"
+              placeholder="Search"
+              value={key}
+              onChange={(e) => setKey(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+            >
+              <FaSearch />
+            </button>
+          </form>
         </div>
       </div>
 
@@ -96,11 +179,21 @@ export default function Products() {
         hasMore={hasMore}
         loader={<h4 className="text-center my-4">Loading more...</h4>}
       >
-        <div className="flex flex-wrap justify-center gap-2 overflow-hidden min-h-[500px] pb-40 ">
+        <div className="flex flex-wrap justify-center gap-2 space-y-4 overflow-hidden min-h-[500px] pb-40 xl:px-20 lg:p-20 md:p-10">
           {filteredProducts.map((el, index) => (
-            <div key={el.id || index}>
-              <button className=" cursor-pointer" onClick={() => addToCart(setCart, el)}>Tambah ke Keranjang</button>
+            <div
+              key={el.id || index}
+              className="bg-white p-1 sm:p-2 rounded-md flex-col flex justify-between items-center h-64 sm:h-fit w-44 sm:w-fit"
+            >
               <Card product={el} />
+              <div className="w-full flex flex-row-reverse p-2 ">
+                <button
+                  onClick={() => addToCart(setCart, el)}
+                  className="border-2 w-full h-8 lg:text-xs lg:w-1/2 md:w-full text-sm sm:w-full hover:bg-black hover:text-white cursor-pointer transition-all duration-300   rounded-full flex justify-center items-center"
+                >
+                  Add to cart
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -111,7 +204,7 @@ export default function Products() {
           <div className="sm:flex sm:items-center sm:justify-between">
             <a className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Gizmo<span className="text-[#c06f52]">.</span>
+                Gizmo<span className="text-[#c06f52]">.</span>
               </span>
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0 ">
@@ -141,7 +234,7 @@ export default function Products() {
           <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2025{" "}
             <a href="#" className="hover:underline">
-            Gizmo™
+              Gizmo™
             </a>
             . All Rights Reserved.
           </span>
