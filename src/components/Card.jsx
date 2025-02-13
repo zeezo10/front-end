@@ -18,6 +18,7 @@ export default function Card(props) {
 
             <img
               src={product.image}
+              loading="lazy"
               alt={product.name}
               className="w-full h-full   object-cover"
             />
