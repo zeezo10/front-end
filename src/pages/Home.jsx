@@ -67,7 +67,7 @@ export default function Home() {
           {product.state === "loading" ? (
             <h1>Loading</h1>
           ) : (
-            <div className=" flex flex-wrap justify-center sm:grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 w-full ">
+            <div className=" place-items-center grid grid-cols-2  justify-center sm:grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 w-full ">
               {bestSellers.slice(0, 4).map((el, index) => (
                 <Card key={index} product={el} />
               ))}
