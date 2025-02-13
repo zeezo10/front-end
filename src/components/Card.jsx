@@ -17,7 +17,7 @@ export default function Card(props) {
             <div className="w-full h-36 md:h-52 lg:h-[400px] bg-[#dedede]">
 
             <img
-              // src={product.image}
+              src={product.image}
               alt={product.name}
               className="w-full h-full   object-cover"
             />
