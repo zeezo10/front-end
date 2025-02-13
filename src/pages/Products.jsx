@@ -182,7 +182,7 @@ export default function Products() {
           {filteredProducts.map((el, index) => (
             <div
               key={el.id || index}
-              className="bg-white p-1 sm:p-2 rounded-md flex-col flex justify-between items-center h-64 sm:h-fit w-44 sm:w-fit"
+              className="bg-white p-1 sm:p-2 rounded-md flex-col flex justify-between items-center h-72 sm:h-fit w-44 sm:w-fit"
             >
               <Card product={el} />
               <div className="w-full flex flex-row-reverse p-2 ">

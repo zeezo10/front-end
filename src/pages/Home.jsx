@@ -121,8 +121,8 @@ export default function Home() {
 
           <div className="w-full flex justify-center items-center h-20 md:h-0">
             <Link to={"/products"}
-            className=" cursor-pointer hover:text-[#505050]"
-            >More</Link>
+            className=" cursor-pointer hover:text-[#c06f52]"
+            >- More -</Link>
           </div>
         </div>
       </div>
