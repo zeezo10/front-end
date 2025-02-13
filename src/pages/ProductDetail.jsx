@@ -5,6 +5,7 @@ import LoadingProduct from "../components/LoadingProduct";
 import { cartAtom } from "../jotai/cartAtom";
 import { useSetAtom } from "jotai";
 import { addToCart } from "../jotai/cartUtils";
+import Footer from "../components/Footer";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -101,36 +102,7 @@ export default function ProductDetail() {
           <p className="text-gray-500 mt-4">{item.description}</p>
         </div>
       </div>
-      <footer className=" bg-black text-white py-6 px-4 text-center">
-        <p className="text-lg font-semibold">
-          Gizmo<span className="text-[#c06f52]">.</span>
-        </p>
-        <ul className="flex flex-wrap justify-center gap-4 text-sm mt-4">
-          <li>
-            <a href="#" className="hover:underline">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:underline">
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:underline">
-              Licensing
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:underline">
-              Contact
-            </a>
-          </li>
-        </ul>
-        <p className="text-xs text-gray-500 mt-4">
-          © 2025 Gizmo™. All Rights Reserved.
-        </p>
-      </footer>
+      <Footer />
     </>
   );
 }

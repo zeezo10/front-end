@@ -1,6 +1,4 @@
 /* eslint-disable */
-;
-
 import { useEffect, useState } from "react";
 import { productsAtom, searchQueryAtom } from "../jotai/Jotai";
 import { useAtom, useSetAtom } from "jotai";
@@ -8,7 +6,8 @@ import Card from "../components/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { addToCart } from "../jotai/cartUtils";
 import { cartAtom } from "../jotai/cartAtom";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaCheck } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 export default function Products() {
   const [products] = useAtom(productsAtom);
@@ -18,6 +17,23 @@ export default function Products() {
   const [hasMore, setHasMore] = useState(true);
   const [visibleCount, setVisibleCount] = useState(8);
   const [key, setKey] = useState("");
+  const [clicked, setClicked] = useState(false);
+
+  const [clickedItems, setClickedItems] = useState({});
+
+  const handleAddToCart = (el) => {
+    addToCart(setCart, el);
+    setClickedItems((prev) => ({ ...prev, [el.id]: true }));
+
+    setTimeout(() => {
+      setClickedItems((prev) => ({ ...prev, [el.id]: false })); // Reset only this product
+    }, 2000);
+  };
+
+  // const clickAdd = () => {
+  //   setClicked(true);
+
+  // };
 
   const setCart = useSetAtom(cartAtom);
 
@@ -49,10 +65,15 @@ export default function Products() {
   };
 
   if (products.state === "hasError") return <h1>ERROR</h1>;
-  if (products.state === "loading") return <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">LOADING ...</div>;
-    
+  if (products.state === "loading")
+    return (
+      <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
+        LOADING ...
+      </div>
+    );
 
   return (
+    <>
     <div className="flex flex-col items-center  bg-[#ede8de]  font-sans pt-5 ">
       <div className="sm:h-16 w-full text-xs  h-10 bg-[#c06f52] flex justify-center items-center text-white font-thin sm:text-xl">
         Shop smart, save big! Grab the best deals before they're gone!
@@ -172,6 +193,7 @@ export default function Products() {
       )}
 
       {/* Infinite Scroll */}
+
       <InfiniteScroll
         dataLength={visibleCount}
         next={fetchMoreData}
@@ -185,12 +207,18 @@ export default function Products() {
               className="bg-white p-1 sm:p-2 rounded-md flex-col flex justify-between items-center h-72 sm:h-fit w-44 sm:w-fit"
             >
               <Card product={el} />
-              <div className="w-full flex flex-row-reverse p-2 ">
+              <div className="w-full flex flex-row-reverse p-2">
                 <button
-                  onClick={() => addToCart(setCart, el)}
-                  className="border-2 w-full h-8 lg:text-xs lg:w-1/2 md:w-full text-sm sm:w-full hover:bg-black hover:text-white cursor-pointer transition-all duration-300   rounded-full flex justify-center items-center"
+                  onClick={() => handleAddToCart(el)}
+                  className="border-2 w-full h-8 lg:text-xs lg:w-1/2 md:w-full text-sm sm:w-full hover:bg-black hover:text-white cursor-pointer transition-all duration-300 rounded-full flex justify-center items-center"
                 >
-                  Add to cart
+                  {clickedItems[el.id] ? (
+                    <div className=" transition-all duration-300">
+                      <FaCheck />
+                    </div>
+                  ) : (
+                    <div className="transition-all duration-300">Add to cart</div>
+                  )}
                 </button>
               </div>
             </div>
@@ -198,47 +226,9 @@ export default function Products() {
         </div>
       </InfiniteScroll>
 
-      <footer className="  shadow bg-black text-white w-full ">
-        <div className="w-full mx-auto p-4 md:py-8">
-          <div className="sm:flex sm:items-center sm:justify-between">
-            <a className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Gizmo<span className="text-[#c06f52]">.</span>
-              </span>
-            </a>
-            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0 ">
-              <li>
-                <a href="#" className="hover:underline me-4 md:me-6">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline me-4 md:me-6">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline me-4 md:me-6">
-                  Licensing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-          <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-          <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2025{" "}
-            <a href="#" className="hover:underline">
-              Gizmo™
-            </a>
-            . All Rights Reserved.
-          </span>
-        </div>
-      </footer>
     </div>
+       <Footer/>
+    
+    </>
   );
 }
