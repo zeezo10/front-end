@@ -12,11 +12,16 @@ import Footer from "../components/Footer";
 export default function Home() {
   const [product] = useAtom(productsAtom);
 
-  if (product.state === "hasError") return <h1>ERROR</h1>;
+  if (product.state === "hasError")
+    return (
+      <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
+        ERROR
+      </div>
+    );
   if (product.state === "loading")
     return (
       <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
-        LOADING ...
+        LOADING
       </div>
     );
 
@@ -25,7 +30,7 @@ export default function Home() {
   return (
     <div className="bg-[#ede8de] ">
       <div className="h-80 w-full xl:h-[700px] p-5 md:h-[500px]  sm:p-10 overflow-hidden relative lg:h-[500px]">
-          <HomeBanner/>
+        <HomeBanner />
       </div>
 
       <div className="md:h-16 md:w-full h-8 bg-black flex justify-center items-center text-white font-thin text-xs md:text-xl">
@@ -96,12 +101,11 @@ export default function Home() {
         </div>
       </div>
 
-     <HomeCol/>
+      <HomeCol />
 
       <div className="h-[100px] bg-[#ede8de]"></div>
 
-            <Footer/>
-
+      <Footer />
     </div>
   );
 }

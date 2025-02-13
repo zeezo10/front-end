@@ -25,17 +25,22 @@ const Cart = () => {
   const removeCart = useSetAtom(removeFromCart);
   const navigate = useNavigate();
 
-  if (cart.state === "hasError") return <h1>ERROR</h1>;
+  if (cart.state === "hasError")
+    return (
+      <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
+        ERROR
+      </div>
+    );
   if (cart.state === "loading")
     return (
       <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
-        LOADING ...
+        LOADING
       </div>
     );
 
   return (
     <>
-      <div className="min-h-screen bg-[#ede8de] px-4 md:px-10 lg:px-20 pb-20 pt-10  ">
+      <div className="min-h-screen bg-[#ede8de] px-4 md:px-10 lg:px-20 xl:px-40  pb-20 ">
         {/* Header */}
         <div className="py-5 flex md:justify-between items-center gap-5">
           <div className="flex gap-3 items-center">
@@ -85,7 +90,7 @@ const Cart = () => {
                         <div className="text-sm sm:text-sm md:text-lg  font-semibold   text-[#2c2c2c] sm:w-1/2">
                           {item.name}
                         </div>
-                        <div className="sm:flex  justify-between flex-1 sm:px-4 min-w-24">
+                        <div className="sm:flex  justify-between flex-1 sm:px-4 md:pr-10 min-w-24 ">
                           <div className="text-xs sm:text-sm md:text-base">
                             <h2 className="text-xs sm:text-sm md:text-base">
                               Quantity:
@@ -113,7 +118,7 @@ const Cart = () => {
                 ))}
               </ul>
 
-              <div className="w-full lg:w-1/3 flex flex-col lg:px-5 py-3 ">
+              <div className="w-full lg:w-1/3 flex flex-col lg:pl-3 py-3 ">
                 <div className="bg-white shadow-md p-5">
                   <div className="text-lg border-b pb-2">Total Cart</div>
                   <div className="py-6 space-y-3 text-[#777777]">

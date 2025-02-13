@@ -23,9 +23,9 @@ export default function NavBar() {
     <nav
       className={`${
         fixed
-          ? "bg-[rgba(228,228,228,0.3)] backdrop-blur-sm fixed top-0 left-0 right-0 z-50"
+          ? "bg-[rgba(214,214,214,0.5)] backdrop-blur-sm fixed top-0 left-0 right-0 z-50"
           : "bg-[#ede8de] "
-      } ${fixed ? "mx-3 my-3 py-3" : "rounded-none py-5"} 
+      } ${fixed ? "mx-4 my-3 py-3" : "rounded-none h-20"} 
         rounded-lg flex items-center justify-between px-5 lg:px-10 transition-all duration-300 `}
     >
       {/* Logo */}
@@ -35,7 +35,7 @@ export default function NavBar() {
 
       {/* Mobile Menu Button */}
       <button 
-        className="lg:hidden text-[#141414] focus:outline-none" 
+        className="lg:hidden text-[#141414] focus:outline-none " 
         onClick={() => setMenuOpen(!menuOpen)}
       >
         {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -43,8 +43,8 @@ export default function NavBar() {
 
       {/* Navigation Links */}
       <div
-        className={`absolute z-50 lg:static top-16  left-0 right-0 pb-5 sm:p-0 shadow-2xl sm:shadow-none bg-[rgba(228,228,228,0.8)]  lg:bg-transparent lg:flex flex-col lg:flex-row gap-5 items-center lg:relative transition-all duration-300 ${
-          menuOpen ? "flex" : "hidden"
+        className={`absolute z-50 lg:static   top-14  left-0 right-0 pb-5 sm:p-0 shadow-2xl sm:shadow-none   lg:bg-transparent lg:flex flex-col lg:flex-row gap-5 items-center lg:relative transition-all duration-300 ${
+          menuOpen ? "flex py-4 rounded-md bg-[rgba(214,214,214,0.5)] transition-all duration-300" : "hidden"
         }`}
       >
         <Link to={"/"} className="hover:text-[#c06f52] text-[#141414] px-4 py-2">

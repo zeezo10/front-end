@@ -13,7 +13,7 @@ export default function HomeBanner() {
   >
     <div className="flex flex-col flex-1 z-10">
       <div className="flex h-full w-full bg">
-        <div className="md:w-2/3 md:p-10 lg:p-20 p-5 flex flex-col justify-between font-sans w-full">
+        <div className="md:w-2/3 md:p-10 lg:p-20 p-5 flex flex-col justify-between  w-full">
           <p className="text-white text-xs hidden sm:block">
             <span className="text-[#c06f52]">A</span> B C D{" "}
             <span className="text-[#c06f52]">E</span> F G H I J K{" "}

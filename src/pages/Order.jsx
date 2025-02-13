@@ -7,22 +7,30 @@ import Footer from "../components/Footer";
 const Order = () => {
   const [orders] = useAtom(ordersAtom);
 
-  if (orders.state === "hasError") return <h1>ERROR</h1>;
+  if (orders.state === "hasError")
+    return (
+      <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
+        ERROR
+      </div>
+    );
   if (orders.state === "loading")
     return (
       <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
-        LOADING ...
+        LOADING
       </div>
     );
 
   return (
     <>
       <div className="min-h-screen bg-[#ede8de] px-4 md:px-10 lg:px-20 xl:px-40 pb-20">
-        <div className="py-5 flex flex-wrap items-center gap-5">
-          <h2 className="text-2xl md:text-3xl font-bold">My Orders</h2>
-          <h2 className="text-2xl md:text-3xl">{orders.length}</h2>
+        <div className="py-5 flex md:justify-between items-center gap-5">
+          <div className="flex gap-3 items-center">
+            <h2 className="text-2xl md:text-3xl font-bold">My Orders</h2>
+          </div>
+          <div className="text-lg md:text-xl text-[#787878]">
+            Items / {orders.length}
+          </div>
         </div>
-
         <div className="flex flex-col min-h-screen">
           {orders.length === 0 ? (
             <p className="text-center text-gray-500">Order empty</p>

@@ -34,9 +34,9 @@ export default function ProductDetail() {
 
   if (error)
     return (
-      <h1 className="text-center text-red-500">
-        Error fetching product details
-      </h1>
+      <div className="h-screen bg-[#ede8de] flex justify-center items-center text-4xl font-bold text-[#c06f52] transition-all duration-300 ">
+      ERROR
+    </div>
     );
   if (!product) return <LoadingProduct />;
 
